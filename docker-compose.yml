@@ -7,25 +7,30 @@ services:
       MONGO_INITDB_ROOT_USERNAME: $MONGO_USERNAME
       MONGO_INITDB_ROOT_PASSWORD: $MONGO_PASSWORD
       MONGO_INITDB_DATABASE: $MONGO_DATABASE
-    ports:
-      - target: 27017
-        published: $MONGO_PORT
     volumes:
       - ./mongo_initdb:/docker-entrypoint-initdb.d
 
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
   redis:
     image: redis:6.2
-    ports:
-      - target: 6379
-        published: $REDIS_PORT
+    healthcheck:
+      test: "redis-cli ping"
+      interval: 1s
+      timeout: 3s
+      retries: 30
 
   rabbitmq:
-    image: rabbitmq:3.9-management
+    image: rabbitmq:3.9
     environment:
       RABBITMQ_DEFAULT_USER: $RABBITMQ_USERNAME
       RABBITMQ_DEFAULT_PASS: $RABBITMQ_PASSWORD
-    ports:
-      - target: 5672
-        published: $RABBITMQ_PORT
-      - target: 15672
-        published: 15672
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
