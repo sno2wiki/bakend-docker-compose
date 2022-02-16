@@ -1,6 +1,17 @@
 version: "3.9"
 
 services:
+  ws-handler:
+    build:
+      context: ./services/ws-handler
+      dockerfile: Dockerfile
+    environment:
+      PORT: 8000
+      RABBITMQ_URI: amqp://${RABBITMQ_USERNAME}:${RABBITMQ_PASSWORD}@rabbitmq:5672
+    depends_on:
+      rabbitmq:
+          condition: service_healthy
+
   document-edit-server:
     build:
       context: ./services/document-edit-server
