@@ -4,3 +4,6 @@
 [submodule "services/ws-handler"]
 	path = services/ws-handler
 	url = git@github.com:sno2wiki/ws-handler.git
+[submodule "services/http-server"]
+	path = services/http-server
+	url = git@github.com:sno2wiki/http-server.git
