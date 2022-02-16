@@ -1,0 +1,3 @@
+[submodule "services/document-edit-server"]
+	path = services/document-edit-server
+	url = https://github.com/sno2wiki/document-edit-server
