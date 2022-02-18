@@ -1,9 +1,6 @@
 [submodule "services/document-edit-server"]
 	path = services/document-edit-server
 	url = https://github.com/sno2wiki/document-edit-server
-[submodule "services/ws-handler"]
-	path = services/ws-handler
-	url = git@github.com:sno2wiki/ws-handler.git
-[submodule "services/http-server"]
-	path = services/http-server
-	url = git@github.com:sno2wiki/http-server.git
+[submodule "services/api-server"]
+	path = services/api-server
+	url = https://github.com/sno2wiki/api-server
