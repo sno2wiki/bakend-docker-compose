@@ -16,7 +16,7 @@ services:
           condition: service_healthy
     ports:
       - target: 8000
-        published: 8000
+        published: 9000
 
   document-edit-server:
     build:
