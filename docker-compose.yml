@@ -11,20 +11,9 @@ services:
     depends_on:
       rabbitmq:
           condition: service_healthy
-  http-server:
-    build:
-      context: ./services/http-server
-      dockerfile: Dockerfile
-    environment:
-      PORT: 8000
-      MONGO_URI: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/${MONGO_DATABASE}?authSource=admin
-    depends_on:
-      mongo:
-          condition: service_healthy
     ports:
       - target: 8000
-        published: 8001
-
+        published: 8000
 
   document-edit-server:
     build:
