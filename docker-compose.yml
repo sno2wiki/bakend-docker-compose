@@ -1,14 +1,17 @@
 version: "3.9"
 
 services:
-  ws-handler:
+  api-server:
     build:
-      context: ./services/ws-handler
+      context: ./services/api-server
       dockerfile: Dockerfile
     environment:
       PORT: 8000
       RABBITMQ_URI: amqp://${RABBITMQ_USERNAME}:${RABBITMQ_PASSWORD}@rabbitmq:5672
+      MONGO_URI: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/${MONGO_DATABASE}?authSource=admin
     depends_on:
+      mongo:
+          condition: service_healthy
       rabbitmq:
           condition: service_healthy
     ports:
